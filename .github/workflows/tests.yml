@@ -24,4 +24,4 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Run Auth Service Tests
-        run: cd auth && npm install && npm run test:ci
+        run: cd auth && npm install && npm test:ci
