@@ -1,0 +1,21 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/*.yaml # skaffold automatically re-apply the yaml files in this dir after editing
+build:
+  # local:
+  #   push: false # if true, skaffold will immediately push updated image to docker hub
+  googleCloudBuild:
+    projectId: fantastix-383104
+  artifacts:
+    - image: us.gcr.io/fantastix-383104/auth
+      context: auth # (auth dir) directory of authentication feature 
+      docker: 
+        dockerfile: Dockerfile
+      sync: 
+        manual:
+          - src: 'src/**/*.ts' # if a js file matching 'src' dir is modified, skaffold will apply it directly to the running pods
+            dest: .          # if anything else is modified (ex: node_modules), the image is rebuilt and depl is updated
+

@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-srv
+  annotations: # when ingress see this annotation, it will expect some routing rules
+    kubernetes.io/ingress.class: nginx 
+    nginx.ingress.kubernetes.io/use-regex: 'true' # this allows regex for path matching
+spec:
+  rules: # ROUTING RULE. IMPORTANT
+    - host: fantastix.com # the domain name of the app/microservice (replaces localhost)
+      http:
+        paths:
+          - path: /api/users/?(.*) # view specific user
+            pathType: Prefix # Matches based on a URL path prefix split by /
+            backend:
+              service:
+                name: auth-cip # name of the cluster ip service for posts app
+                port:
+                  number: 3000
+          
+          - path: / # view specific user
+            pathType: Prefix # Matches based on a URL path prefix split by /
+            backend:
+              service:
+                name: auth-cip # name of the cluster ip service for posts app
+                port:
+                  number: 3000
