@@ -9,7 +9,7 @@
     "start": "ts-node-dev --poll src/index.ts"
   },
   "jest": {
-    "preset":"ts-jest",
+    "preset": "ts-jest",
     "testEnvironment": "node",
     "setupFilesAfterEnv": [
       "./src/test/setup.ts"
@@ -31,6 +31,8 @@
     "typescript": "^5.0.2"
   },
   "devDependencies": {
-    "@types/cookie-session": "^2.0.44"
+    "@types/cookie-session": "^2.0.44",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.1.0"
   }
 }
