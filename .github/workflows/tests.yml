@@ -27,5 +27,4 @@ jobs:
         run: |
             cd auth 
             npm install
-            npm install -g jest
             npm run test:ci
